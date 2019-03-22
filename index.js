@@ -24,6 +24,17 @@ function Uploader(options) {
     this.uploadedFiles = 0;
     this.root = path.resolve(process.cwd());
 
+    if (options.prefixTimestamp && this.prefix) {
+        let d = new Date();
+        let datestring = ("0"+(d.getMonth()+1)).slice(-2) + ("0" + d.getDate()).slice(-2) +
+            d.getFullYear() + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + ("0" + d.getSeconds()).slice(-2);
+        this.prefix += `-${datestring}`
+    }
+
+    if (this.prefix) {
+        this.prefix += '/';
+    }
+
     var opts = {
         apiVersion: '2006-03-01'
     };
