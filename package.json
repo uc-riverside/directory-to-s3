@@ -1,5 +1,5 @@
 {
-  "name": "directory-to-s3",
+  "name": "@ucr/directory-to-s3",
   "version": "1.0.0-rc4",
   "description": "CLI to simply upload a directory to Amazon S3",
   "main": "index.js",
@@ -9,22 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/department-stockholm/directory-to-s3.git"
+    "url": "git+https://github.com/uc-riverside/directory-to-s3"
   },
   "keywords": [
-    "cli",
-    "aws",
-    "s3",
-    "upload",
-    "directory",
-    "pattern"
+    "ucriverside"
   ],
   "author": "Department <npm@department.se> (https://department.se)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/department-stockholm/directory-to-s3/issues"
+    "url": "https://github.com/uc-riverside/directory-to-s3/issues"
   },
-  "homepage": "https://github.com/department-stockholm/directory-to-s3#readme",
+  "homepage": "https://github.com/uc-riverside/directory-to-s3#readme",
   "dependencies": {
     "aws-sdk": "^2.2.13",
     "bytes": "^2.1.0",
