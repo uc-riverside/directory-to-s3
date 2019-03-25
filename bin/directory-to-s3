@@ -29,14 +29,23 @@ const options = docopt(usage, {
 const directories = options['--directory'];
 const patterns = options['--pattern'];
 
-var uploader = new Uploader({
-  bucket: options['<bucket>'],
-  verbose: options['--verbose'],
-  region: options['--region'].pop(),
-  prefix: options['--prefix'].pop() || '',
-  prefixTimestamp: options['--prefixTimestamp'],
-  acl: options['--acl'].pop()
-});
+var config = {
+    bucket: options['<bucket>'],
+    verbose: options['--verbose'],
+    region: options['--region'].pop(),
+    prefix: options['--prefix'].pop() || '',
+    prefixTimestamp: options['--prefixTimestamp'],
+    acl: options['--acl'].pop()
+};
+
+if (config.prefixTimestamp && config.prefix) {
+    let d = new Date();
+    let datestring = ("0"+(d.getMonth()+1)).slice(-2) + ("0" + d.getDate()).slice(-2) +
+        d.getFullYear() + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + ("0" + d.getSeconds()).slice(-2);
+    config.prefix += `-${datestring}`
+}
+
+var uploader = new Uploader(config);
 
 if (directories) {
   directories.forEach(function(dir) {
@@ -63,4 +72,6 @@ uploader.on('end', function() {
   if (this.verbose) {
     console.log('DONE!');
   }
+
+  console.log(`View report: http://${config.bucket}.s3-website-${config.region}.amazonaws.com/${config.prefix}`);
 })
